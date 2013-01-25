@@ -11,7 +11,7 @@
 
 (function($) {
 
-    $.nivoGallery = function(element, options){
+    $.nivoGalleryWSVersion = function(element, options){
 
         var defaults = {
             pauseTime: 3000,
@@ -158,7 +158,7 @@
             if(plugin.settings.effect == 'fade'){
                 var galleryEnd = false;
                 global.animating = true;
-                $(global.slides[global.currentSlide]).fadeOut(plugin.settings.animSpeed, function(){
+                $(global.slides[global.currentSlide]).fadeOut(plugin.settings.animSpeed, function(){ })
                     if(direction == 'prev'){
                         global.currentSlide--;
                         if(global.currentSlide < 0){ 
@@ -172,18 +172,26 @@
                             galleryEnd = true;
                         }
                     }
-                    loadSlide(global.currentSlide, function(){
-                        $element.find('.nivoGallery-count').text(setCount());
-                        $element.find('.nivoGallery-caption').html(setCaption());
+                    var idx = global.currentSlide;
+                    $element.find('.nivoGallery-slides').append(global.slides[idx]);
+                if(idx == 0){
+                    $element.trigger('galleryloaded');
+                }
+                $element.addClass('loaded');
+                $(global.slides[idx]).data('loaded', true);
+                $(global.slides[idx]).addClass('slide-'+ (idx + 1));
+                
+                if($(global.slides[idx]).attr('data-type') == 'html') $(global.slides[idx]).wrapInner('<div class="nivoGallery-htmlwrap"></div>');
+                if($(global.slides[idx]).attr('data-type') == 'video') $(global.slides[idx]).wrapInner('<div class="nivoGallery-videowrap"></div>');
+                $element.find('.nivoGallery-count').text(setCount());
+                $element.find('.nivoGallery-caption').html(setCaption());
                         
-                        $(global.slides[global.currentSlide]).fadeIn(plugin.settings.animSpeed, function(){
+                $(global.slides[global.currentSlide]).fadeIn(plugin.settings.animSpeed, function(){
                             global.animating = false;
                             runTimeout();
                             plugin.settings.afterChange.call(this, global.currentSlide, $(global.slides[global.currentSlide]), global.paused);
                             if(galleryEnd) plugin.settings.galleryEnd.call(this);
-                        });
-                    });
-                });
+               });
             }
         }
         
@@ -267,11 +275,11 @@
 
     }
 
-    $.fn.nivoGallery = function(options){
+    $.fn.nivoGalleryWSVersion = function(options){
 
         return this.each(function() {
             if (undefined == $(this).data('nivoGallery')){
-                var plugin = new $.nivoGallery(this, options);
+                var plugin = new $.nivoGalleryWSVersion(this, options);
                 $(this).data('nivoGallery', plugin);
             }
         });

@@ -1,0 +1,31 @@
+{
+  "name": "nivogallerywsversion",
+  "title": "Webby Scots Version of the Nivo Gallery",
+  "description": "The world's most awesome jQuery Image Gallery, now without the Black pause between images",
+  "version": "1.0.0",
+  "keywords": [
+    "jquery",
+    "image",
+    "gallery",
+    "nivo"
+  ],
+  "author": {
+        "name": "Liam Bailey",
+        "url": "http://smallcoders.com/"
+  },
+  "dependencies": {
+    "jquery": ">=1.5"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git://github.com/gilbitron/Nivo-Gallery.git/Nivo-Gallery.git"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "https://github.com/gilbitron/Nivo-Gallery/blob/master/license.txt"
+    }
+  ]
+}
