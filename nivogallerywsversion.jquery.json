@@ -2,7 +2,7 @@
   "name": "nivogallerywsversion",
   "title": "Webby Scots Version of the Nivo Gallery",
   "description": "The world's most awesome jQuery Image Gallery, now without the Black pause between images",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "jquery",
     "image",
@@ -24,7 +24,7 @@
   ],
   "licenses": [
     {
-      "name": "MIT",
+      "type": "MIT",
       "url": "https://github.com/gilbitron/Nivo-Gallery/blob/master/license.txt"
     }
   ]
