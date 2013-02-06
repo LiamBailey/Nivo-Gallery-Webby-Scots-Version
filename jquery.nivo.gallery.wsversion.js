@@ -71,6 +71,7 @@
             '</div>').fadeIn(200);
             
             loadSlide(global.currentSlide);
+            
         }
         
         var setCount = function(){
@@ -174,24 +175,31 @@
                     }
                     var idx = global.currentSlide;
                     $element.find('.nivoGallery-slides').append(global.slides[idx]);
-                if(idx == 0){
-                    $element.trigger('galleryloaded');
-                }
+                
                 $element.addClass('loaded');
                 $(global.slides[idx]).data('loaded', true);
                 $(global.slides[idx]).addClass('slide-'+ (idx + 1));
                 
                 if($(global.slides[idx]).attr('data-type') == 'html') $(global.slides[idx]).wrapInner('<div class="nivoGallery-htmlwrap"></div>');
                 if($(global.slides[idx]).attr('data-type') == 'video') $(global.slides[idx]).wrapInner('<div class="nivoGallery-videowrap"></div>');
-                $element.find('.nivoGallery-count').text(setCount());
-                $element.find('.nivoGallery-caption').html(setCaption());
+                
+                   // loadSlide(global.currentSlide, function(){
+                        $element.find('.nivoGallery-count').text(setCount());
+                        $element.find('.nivoGallery-caption').html(setCaption());
                         
-                $(global.slides[global.currentSlide]).fadeIn(plugin.settings.animSpeed, function(){
+                        $(global.slides[global.currentSlide]).fadeIn(plugin.settings.animSpeed, function(){
                             global.animating = false;
+                            if (idx = 0) {
+								$element.trigger('galleryloaded');
+							}
+							else {
                             runTimeout();
+							}
                             plugin.settings.afterChange.call(this, global.currentSlide, $(global.slides[global.currentSlide]), global.paused);
                             if(galleryEnd) plugin.settings.galleryEnd.call(this);
-               });
+                        });
+                    //});
+                //});
             }
         }
         
